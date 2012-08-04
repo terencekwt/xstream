@@ -30,6 +30,7 @@ if($userQuery) { // Login success
   // Set the session variables
   $_SESSION['username'] = $username;
   $_SESSION['id'] = $userQuery['id'];
+  $_SESSION['token'] = $userQuery['token'];  
 
   // Redirect the user
   $redirectPath =
