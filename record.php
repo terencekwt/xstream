@@ -88,13 +88,13 @@
 	
 	function archiveSavedHandler(event) {
 	
-		var archiveTemp = event.archives[0].archiveId;
+		/*var archiveTemp = event.archives[0].archiveId;
 		
 		$.ajax({
 			type: "POST",
 			url: "archiveVideo.php",
 			data: { data: archiveTemp }
-		});
+		});*/
 
 	
 		document.getElementById('archiveList').style.display = 'block';
@@ -169,7 +169,7 @@
 		  url: "share_video.php",
 		  data: {sharepersonUsername: shareperson.value, archiveId: hiddenInput.value }
 		}).done(function( msg ) {
-		  alert( "Video Shared!");
+		  //alert( "Video Shared!");
 		});
 
 		return true;
