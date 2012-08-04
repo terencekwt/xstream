@@ -53,7 +53,8 @@
 		recorder.addEventListener('recordingStarted', recStartedHandler);
 		recorder.addEventListener('archiveSaved', archiveSavedHandler);
 		
-		$('#playbackCam').height(0);
+		$('#currentCam').hide('slow');
+		$('#playbackCam').hide('slow');
 	}
 
 	function getImg(imgData) {
@@ -64,7 +65,6 @@
 
 	function loadArchiveInPlayer(archiveId) {
 		//archiveId = "fc09cc82-3dc0-4026-a854-d162c86d9328";
-		recorderManager.removeRecorder(recorder);
 		if (!player) {
 			//playerDiv = document.createElement('div');
 			//playerDiv.setAttribute('id', 'playerElement');
@@ -73,8 +73,8 @@
 			player = recorderManager.displayPlayer(archiveId, TOKEN, 'playbackCam', { height: VIDEO_HEIGHT, width: VIDEO_WIDTH} );
 			//document.getElementById('playerContainer').style.display = 'block';
 			
-			$('#currentCam').height(0);
-			$('#playbackCam').height(VIDEO_HEIGHT);
+			$('#currentCam').hide('slow');
+			$('#playbackCam').show('slow');
 		} else {
 			player.loadArchive(archiveId);
 		}
@@ -94,10 +94,9 @@
 		aLink.setAttribute('href',
 							"javascript:loadArchiveInPlayer(\'" + event.archives[0].archiveId + "\')");
 		var recImg = getImg(recImgData);
-		recImg.setAttribute('style', 'width:40; height:30; margin-right:2px');
+		recImg.setAttribute('style', 'width:80; height:60; margin-right:2px');
 		aLink.appendChild(recImg);
-		//document.getElementById('archiveList').appendChild(aLink);
-		document.getElementById('rightPanel').appendChild(aLink);
+		document.getElementById('archiveList').appendChild(aLink);
 		
 		$('#currentCam').hide('slow');
 		$('#playbackCam').show('slow');
@@ -160,7 +159,7 @@
 				</a>
 
 				<ul class="nav pull-right">
-					<li class=""><a href="#"><? echo $_SESSION['username']; ?></a></li>					
+					<li class=""><a href="#"><? $_SESSION['username'] ?></a></li>					
 					<li class="divider-vertical"></li>
 					<li class=""><a href="logout.php">Sign Out</a></li>						
 				</ul>
@@ -169,20 +168,18 @@
 	</div>
 	<div id="camera_panel">
 		<div class="row-fluid">
-		<div class="span3" id="rightPanel">
-			<!--
-			<div id="box1" class="box"></div>
-			<div id="box2" class="box"></div>
-			<div id="box3" class="box"></div>
-			-->
+		<div class="span3">
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
 		</div>
 		<div class="span6">
 		<div id="camera" style="border: 2px solid blue;">
-			<div id="currentCam" style="border: 5px solid green;position: absolute;">
+			<div id="currentCam" style="board: 5px solid green;">
 			CURRENTCAM
 			</div>
 			
-			<div id="playbackCam" style="border: 5px solid black; position: absolute; margin-top: -600px;">
+			<div id="playbackCam" style="board: 5px solid black;">
 			PLAYBACKCAM
 			</div>
 			
