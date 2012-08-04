@@ -10,7 +10,6 @@
 	require_once('global_lib.php');
 ?>
 
-
 <link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 
@@ -28,9 +27,6 @@
 	var player;
 	var recImgData;
 
-	//var API_KEY = ; // Replace with your API key. See http://www.tokbox.com/
-	//var TOKEN = ''; // Replace with a generated token that has the moderator role. See http://www.tokbox.com/opentok/api/tools/generator
-	
 	var API_KEY = "17003151";
 	//var sessionId = "2_MX4xNzAwMzE1MX5-U2F0IEF1ZyAwNCAwMTo1MjozMiBQRFQgMjAxMn4wLjA1OTA4OTMwM34";
     var TOKEN = "<? echo $_SESSION['token']; ?>";
@@ -98,9 +94,10 @@
 		aLink.setAttribute('href',
 							"javascript:loadArchiveInPlayer(\'" + event.archives[0].archiveId + "\')");
 		var recImg = getImg(recImgData);
-		recImg.setAttribute('style', 'width:80; height:60; margin-right:2px');
+		recImg.setAttribute('style', 'width:40; height:30; margin-right:2px');
 		aLink.appendChild(recImg);
-		document.getElementById('archiveList').appendChild(aLink);
+		//document.getElementById('archiveList').appendChild(aLink);
+		document.getElementById('rightPanel').appendChild(aLink);
 		
 		$('#currentCam').hide('slow');
 		$('#playbackCam').show('slow');
@@ -170,8 +167,16 @@
 			</div>
 		</div>
 	</div>
-	
 	<div id="camera_panel">
+		<div class="row-fluid">
+		<div class="span3" id="rightPanel">
+			<!--
+			<div id="box1" class="box"></div>
+			<div id="box2" class="box"></div>
+			<div id="box3" class="box"></div>
+			-->
+		</div>
+		<div class="span6">
 		<div id="camera" style="border: 2px solid blue;">
 			<div id="currentCam" style="board: 5px solid green;">
 			CURRENTCAM
@@ -189,6 +194,9 @@
 			</div>
 			<div style="clear:both; margin"></div>
 			<div id="myList"></div>-->
+		</div>
+		</div>
+		<div class="span3">adsfadsfad</div>
 		</div>
 	</div>
 	
