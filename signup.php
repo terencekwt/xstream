@@ -1,5 +1,6 @@
 <?php
 require_once "database.php";
+require_once "Opentok-PHP-SDK/generate.php";
 
 $name = mysql_real_escape_string($_POST['name']);
 $pass = md5(mysql_real_escape_string($_POST['pass']));
@@ -13,12 +14,12 @@ $userQuery =
    WHERE username='$username'";
 $userQuery = mysql_query($userQuery);
 $count = mysql_num_rows($userQuery);
-
+$token = generate();
 
 if($count == 0) {
   $userInsertQuery =
-    "INSERT INTO $user_table(id, username, password, name, email)
-    VALUES(NULL, '$username', '$pass', '$username', '$email')";
+    "INSERT INTO $user_table(id, username, password, name, email, token)
+    VALUES(NULL, '$username', '$pass', '$username', '$email', '$token')";
   //die($connection);
   $userInsertQuery = mysql_query($userInsertQuery) or die("Register unsuccessful");
 

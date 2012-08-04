@@ -6,7 +6,7 @@ $hostName_vis = "vis.cs.ucdavis.edu";
 $username="shunyu"; // mysql account name
 $password="vis@pass";  // mysql account password
 $database="shunyu_xstream_users"; // Our database to connect to
-$user_table="user_table";  // Table for storing account information
+$user_table="user";  // Table for storing account information
 
 
 // Connecting to mysql

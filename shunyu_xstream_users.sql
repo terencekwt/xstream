@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(32) DEFAULT NULL,
   `name` varchar(225) DEFAULT NULL,
   `email` varchar(225) DEFAULT NULL,
+  `token` varchar(225) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
