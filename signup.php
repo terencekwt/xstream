@@ -1,6 +1,6 @@
 <?php
 require_once "database.php";
-require_once "Opentok-PHP-SDK/generate.php";
+require_once "php_sdk/generate.php";
 
 $name = mysql_real_escape_string($_POST['name']);
 $pass = md5(mysql_real_escape_string($_POST['pass']));
