@@ -170,6 +170,7 @@
 		  data: {sharepersonUsername: shareperson.value, archiveId: hiddenInput.value }
 		}).done(function( msg ) {
 		  //alert( "Video Shared!");
+		  $('#sendTo').modal('hide');
 		});
 
 		return true;
