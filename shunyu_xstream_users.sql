@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 04, 2012 at 01:13 PM
+-- Generation Time: Aug 04, 2012 at 02:18 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -50,16 +50,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(225) DEFAULT NULL,
   `token` varchar(225) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `name`, `email`) VALUES
-(1, '1', 'c4ca4238a0b923820dcc509a6f75849b', '1', '1'),
-(2, 'zelox991', '202cb962ac59075b964b07152d234b70', 'zelox991', 'zelox991@gmail.com'),
-(3, 'hi', 'c4ca4238a0b923820dcc509a6f75849b', 'hi', '123');
+INSERT INTO `user` (`id`, `username`, `password`, `name`, `email`, `token`) VALUES
+(1, '1', 'c4ca4238a0b923820dcc509a6f75849b', '1', '1', NULL),
+(2, 'zelox991', '202cb962ac59075b964b07152d234b70', 'zelox991', 'zelox991@gmail.com', NULL),
+(3, 'hi', 'c4ca4238a0b923820dcc509a6f75849b', 'hi', '123', NULL),
+(4, 'terence', 'f56b2700382c1c9513a881d2c2af9f1b', 'terence', 'terence@terence.com', 'T1==cGFydG5lcl9pZD0xNzAwMzE1MSZzaWc9MjY4MDU2NGEyZDZmZTRhNzBlYjYzOWYyNTEzMWYzMzRjZDg2ZDZiNDpzZXNzaW9uX2lkPTFfTVg0eE1UUXlNVGczTW41LU1qQXhNaTB3Tmkwd09DQXdNVG93TmpvMU1DNDBOVE14TXpJck1EQTZNREItTUM0ME9UWTBPVE0zTmpJek1qaCZjcmVhdGVfd');
 
 -- --------------------------------------------------------
 
