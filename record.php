@@ -57,8 +57,7 @@
 		recorder.addEventListener('recordingStarted', recStartedHandler);
 		recorder.addEventListener('archiveSaved', archiveSavedHandler);
 		
-		$('#currentCam').hide('slow');
-		$('#playbackCam').hide('slow');
+		$('#playbackCam').height(0);
 	}
 
 	function getImg(imgData) {
@@ -69,6 +68,7 @@
 
 	function loadArchiveInPlayer(archiveId) {
 		//archiveId = "fc09cc82-3dc0-4026-a854-d162c86d9328";
+		recorderManager.removeRecorder(recorder);
 		if (!player) {
 			//playerDiv = document.createElement('div');
 			//playerDiv.setAttribute('id', 'playerElement');
@@ -77,8 +77,8 @@
 			player = recorderManager.displayPlayer(archiveId, TOKEN, 'playbackCam', { height: VIDEO_HEIGHT, width: VIDEO_WIDTH} );
 			//document.getElementById('playerContainer').style.display = 'block';
 			
-			$('#currentCam').hide('slow');
-			$('#playbackCam').show('slow');
+			$('#currentCam').height(0);
+			$('#playbackCam').height(VIDEO_HEIGHT);
 		} else {
 			player.loadArchive(archiveId);
 		}
@@ -163,7 +163,7 @@
 				</a>
 
 				<ul class="nav pull-right">
-					<li class=""><a href="#"><? $_SESSION['username'] ?></a></li>					
+					<li class=""><a href="#"><? echo $_SESSION['username']; ?></a></li>					
 					<li class="divider-vertical"></li>
 					<li class=""><a href="logout.php">Sign Out</a></li>						
 				</ul>
@@ -173,11 +173,11 @@
 	
 	<div id="camera_panel">
 		<div id="camera" style="border: 2px solid blue;">
-			<div id="currentCam" style="board: 5px solid green;">
+			<div id="currentCam" style="border: 5px solid green;position: absolute;">
 			CURRENTCAM
 			</div>
 			
-			<div id="playbackCam" style="board: 5px solid black;">
+			<div id="playbackCam" style="border: 5px solid black; position: absolute; margin-top: -600px;">
 			PLAYBACKCAM
 			</div>
 			
