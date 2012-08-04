@@ -176,7 +176,7 @@
 		  url: "share_video.php",
 		  data: {sharepersonUsername: shareperson.value, filename:fname.value, comments: thecomments.value, archiveId: hiddenInput.value }
 		}).done(function( msg ) {
-		  alert( "Video Shared! "+msg);
+		  //alert( "Video Shared! "+msg);
 		  $('#sendTo').modal('hide');
 		});
 
