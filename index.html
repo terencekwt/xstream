@@ -6,12 +6,130 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+<?
+	require_once('global_lib.php');
+?>
+
 <link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 
-<script type="text/javascript" src="./bootstrap/js/bootstrap.js"></script>
 <script src="jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap.js"></script>
 <script src="./jQuery-webcam/jquery.webcam.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$('#SignUp_Modal').modal('hide');
+</script>
+
+<script type="text/javascript">
+	function post_to_url(path, params, method) {
+    method = method || "post"; // Set method to post by default, if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+	}
+
+
+	function signup() {
+		var params = new Object;
+		params['username'] = $('#username').val();
+		params['pass'] = $('#pass').val();
+		params['rpass'] = $('#rpass').val();
+		params['name'] = $('#name').val();
+		params['email'] = $('#email').val();
+
+		post_to_url("signup.php", params, "post");
+
+		return true;
+	}
+
+	function login() {
+		document.getElementById('login_form').submit();
+	}
+
+	function key_login(e) {
+		var unicode=e.keyCode? e.keyCode : e.charCode;
+		if(unicode == 13) {
+			login();
+		}
+		else {
+			return false;
+		}
+	}
+
+	function key_signup(e) {
+		var unicode=e.keyCode? e.keyCode : e.charCode;
+		if(unicode == 13) {
+			signup();
+		}
+		else {
+			return false;
+		}
+	}
+</script>
+<script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
+ 
+<script type="text/javascript">
+  var apiKey = '17004581';
+  var sessionId = '14685d1ac5907f4a2814fed28294d3f797f34955';
+  var token = 'devtoken';           
+
+  TB.setLogLevel(TB.DEBUG); // Set this for helpful debugging messages in console
+
+  var session = TB.initSession(sessionId);      
+  session.addEventListener('sessionConnected', sessionConnectedHandler);
+  session.addEventListener('streamCreated', streamCreatedHandler);
+  session.connect(apiKey, token);
+
+  var publisher;
+ 
+  function sessionConnectedHandler(event) {
+      publisher = TB.initPublisher(apiKey, 'camera');
+      session.publish(publisher);
+       
+      // Subscribe to streams that were in the session when we connected
+      subscribeToStreams(event.streams);
+    }
+     
+    function streamCreatedHandler(event) {
+      // Subscribe to any new streams that are created
+      subscribeToStreams(event.streams);
+    }
+     
+    function subscribeToStreams(streams) {
+      for (var i = 0; i < streams.length; i++) {
+        // Make sure we don't subscribe to ourself
+        if (streams[i].connection.connectionId == session.connection.connectionId) {
+          return;
+        }
+ 
+        // Create the div to put the subscriber element in to
+        var div = document.createElement('div');
+        div.setAttribute('id', 'stream' + streams[i].streamId);
+        document.body.appendChild(div);
+                           
+        // Subscribe to the stream
+        var subscribeProps = {height:240, width:320};
+        session.subscribe(streams[i], div.id);
+      }
+    }  
+</script>
 </head>
 
 <body>
@@ -23,50 +141,60 @@
 			</a>
 
 			<ul class="nav pull-right">
+				<li class=""><a data-toggle="modal" href="#Login_Modal" onClick="return login();">Log In</a></li>					
 				<li class="divider-vertical"></li>
-				<li class=""><a href="#">Sign Up</a></li>				
+				<li class=""><a data-toggle="modal" href="#SignUp_Modal">Sign Up</a></li>						
 			</ul>
+
+			<form id="login_form" class="navbar-form pull-right" action="login.php" method="post">
+			  <input type="text" name="username" class="span2" placeholder="username">
+			  <input type="text" name="pass" class="span2" placeholder="password" onkeyup="return key_login(event);">
+			</form>
 		</div>
 	</div>
 </div>
 
 
+
 <!--
 <input type="file" accept="image/*;capture=camera">
 -->
+<<<<<<< HEAD
+=======
+<div id="camera_panel">
+	<div id="camera"></div>
+</div>
+>>>>>>> 550ad517a7fdbec461efed63bbc7cb1a9b2b1ea1
 
 
 
-<script type="text/javascript">
-$("#camera").webcam({
-	width: 320,
-	height: 240,
-	mode: "callback",
-	swffile: "./jQuery-webcam/jscam_canvas_only.swf",
-	onTick: function() {},
-	onSave: function(data) {
-		var col = data.split(";");
-		var img = image;
+<div class="modal hide fade" id="SignUp_Modal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">x</button>
+    <h3>Sign Up</h3>
+  </div>
+  <div class="modal-body">
+  	<label>User Name: </label>
+    <input type="text" id="username" class="input-xlarge"></input>
 
-		for(var i = 0; i < 320; i++) {
-			var tmp = parseInt(col[i]);
-			img.data[pos + 0] = (tmp >> 16) & 0xff;
-			img.data[pos + 1] = (tmp >> 8) & 0xff;
-			img.data[pos + 2] = tmp & 0xff;
-			img.data[pos + 3] = 0xff;
-			pos+= 4;
-		}
+    <label>Password: </label>
+    <input type="password" id="pass" class="input-xlarge"></input>
 
-		if (pos >= 4 * 320 * 240) {
-			ctx.putImageData(img, 0, 0);
-			pos = 0;
-		}
-	},
-	onCapture: function() {},
-	debug: function() {},
-	onLoad: function() {}
-});
-</script>
+    <label>Repeat Password: </label>
+    <input type="password" id="rpass" class="input-xlarge"></input>
+
+    <label>Name: </label>
+    <input type="text" id="name" class="input-xlarge"></input>
+
+    <label>Email: </label>
+    <input type="text" id="email" class="input-xlarge" onkeyup="return key_signup(event);"></input>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-primary" onClick="return signup(event);">Submit</a>
+  </div>
+</div>
+
 </body>
 
 </html>
