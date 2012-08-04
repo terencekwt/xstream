@@ -130,6 +130,12 @@
       }
     }  
 </script>
+<script type="text/javascript">
+		function login_cursor(elemId) {
+			//confirm(elemId);
+			document.getElementById(elemId).focus();
+		}
+	</script>
 </head>
 
 <body>
@@ -147,7 +153,7 @@
 			</ul>
 
 			<form id="login_form" class="navbar-form pull-right" action="login.php" method="post">
-			  <input type="text" name="username" class="span2" placeholder="username">
+			  <input type="text" name="username" class="span2" placeholder="username" id="login_username">
 			  <input type="text" name="pass" class="span2" placeholder="password" onkeyup="return key_login(event);">
 			</form>
 		</div>
@@ -159,12 +165,24 @@
 <!--
 <input type="file" accept="image/*;capture=camera">
 -->
-<<<<<<< HEAD
-=======
-<div id="camera_panel">
-	<div id="camera"></div>
-</div>
->>>>>>> 550ad517a7fdbec461efed63bbc7cb1a9b2b1ea1
+	<h1 align="center">Welcome to xstream.</h1><br />
+	<div class="lead">We want you to be able to share messages wherever you want, whenever you want.</div>
+	
+	<div class="bullets">
+		<h2>With us, you can:</h2><br />
+			<div class="lead">
+				Record videos.<br />
+				Save them for later.<br />
+				Send them to your friends.<br />
+			</div>	
+	</div>
+	
+	<br /><br />
+	<div class="get-started">
+		<a class="btn-large btn-success" data-toggle="modal" href="#SignUp_Modal">Get started today</a><br /><br />
+		<div class="lead">or</div>
+		<button class="btn-large btn-primary" onclick="login_cursor('login_username');">Log In</button>
+	</div>
 
 
 
