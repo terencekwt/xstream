@@ -17,6 +17,11 @@
 <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="./bootstrap/js/bootstrap.js"></script>
 <script src="./jQuery-webcam/jquery.webcam.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$('#sendTo').modal('hide');
+</script>
+
 <script type="text/javascript" charset="utf-8">
 	$('#SignUp_Modal').modal('hide');
 	$('#currentCam').hide();
@@ -87,9 +92,31 @@
 		aLink.setAttribute('href',
 							"javascript:loadArchiveInPlayer(\'" + event.archives[0].archiveId + "\')");
 		var recImg = getImg(recImgData);
-		recImg.setAttribute('style', 'width:40; height:30; margin-right:2px');
+		recImg.setAttribute('style', 'width:40; height:30; margin-right:2px; margin-bottom: 5px;');
 		aLink.appendChild(recImg);
-		document.getElementById('rightPanel').appendChild(aLink);
+
+		var button = document.createElement('a');
+		button.setAttribute('class', 'btn btn-primary btn-mini');
+		button.setAttribute('data-toggle','modal');
+		button.setAttribute('href','#sendTo');
+		button.setAttribute('id', event.archives[0].archiveId)
+		button.setAttribute('onclick','return hideArchiveId(this);')
+		button.setAttribute('style','margin: -60px 0px 0px 5px;')
+		button.innerHTML = "Send";
+
+		var rightPanel = document.getElementById('rightPanel');
+		rightPanel.insertBefore(button, rightPanel.firstChild);
+		rightPanel.insertBefore(aLink, rightPanel.firstChild);
+
+		//alert(event.archives[0].archiveId);
+
+		$.ajax({
+		  type: "POST",
+		  url: "save_video.php",
+		  data: {archiveId: event.archives[0].archiveId }
+		}).done(function( msg ) {
+		  //alert( "Data Saved: ");
+		});
 		
 		console.log(event.archives[0].archiveId);
 	}
@@ -108,37 +135,40 @@
 		alert('Exception: ' + event.code + '::' + event.message);
 	}
 
-</script>
+	function hideArchiveId(object) {
+		var hiddenInput = document.getElementById('hiddenInput');
+		if(!hiddenInput) {
+			hiddenInput = document.createElement('input');
+			hiddenInput.id = "hiddenInput";
+			hiddenInput.type = "hidden";
+		}
+		
+		hiddenInput.value = object.id;
 
-<script type="text/javascript">
-	function post_to_url(path, params, method) {
-    method = method || "post"; // Set method to post by default, if not specified.
-
-    // The rest of this code assumes you are not using a library.
-    // It can be made less wordy if you use one.
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
-
-    for(var key in params) {
-        if(params.hasOwnProperty(key)) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
-
-            form.appendChild(hiddenField);
-         }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
+		document.getElementById('myBody').appendChild(hiddenInput);
 	}
 
+	function shareVid() {
+		var hiddenInput = document.getElementById('hiddenInput');
+		var shareperson = document.getElementById('sharepersonUsername');
+
+		//alert(hiddenInput.value);
+
+		$.ajax({
+		  type: "POST",
+		  url: "share_video.php",
+		  data: {sharepersonUsername: shareperson.value, archiveId: hiddenInput.value }
+		}).done(function( msg ) {
+		  alert( "Video Shared!");
+		});
+
+		return true;
+	}
 </script>
+
 </head>
 
-<body onload="init()">
+<body onload="init()" id="myBody">
 	<div class="navbar">
 		<div class="navbar-inner">
 			<div class="container">
@@ -189,15 +219,23 @@
 	</div>
 	
 	<div id="archiveList" style="height:100px; display:none">
-		<p>Recordings (click to play):</p>
+		
 	</div>
-<!--
-<input type="file" accept="image/*;capture=camera">
 
-<div id="camera_panel">
-	<div id="camera"></div>
+
+<div class="modal hide fade" id="sendTo">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">x</button>
+    <h3>Send To</h3>
+  </div>
+  <div class="modal-body">
+    <input type="text" id="sharepersonUsername" placeholder="Your friend's username here...">
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-primary" onClick="return shareVid();">OK</a>
+  </div>
 </div>
--->
 
 
 
