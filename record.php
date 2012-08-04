@@ -205,16 +205,19 @@
 			-->
 			<?
 
-				$userQuery = "SELECT archiveId FROM share LEFT JOIN video ON share.videoId = video.id WHERE share.sharepersonId = '" . $_SESSION['id'] . "'";
+				$userQuery = "SELECT archiveId, filename, comment,username FROM share LEFT JOIN video ON share.videoId = video.id WHERE share.sharepersonId = '" . $_SESSION['id'] . "'";
 				$userQuery = mysql_query($userQuery);
 				//$userQuery = mysql_fetch_assoc($userQuery);
 				
+				
+				
 				if ($userQuery) {
+					echo '<h3 style="color:white;">Files Shared with me</h3>';
 					echo '<ul>';
 					while($row = mysql_fetch_assoc($userQuery)) {
-							echo '<li>' . $row['archiveId'] . '</li>';
 							?>
 							<script type="text/javascript">
+								/*
 							
 								recImgData = recorder.getImgData();
 								var aLink = document.createElement('a');
@@ -225,9 +228,12 @@
 								//aLink.appendChild(recImg);
 								aLink.value="asdfasfd";
 								//document.getElementById('leftPanel').appendChild(aLink);
+								*/
 							</script>
 							
-							<li><a href = "javascript:loadArchiveInPlayer('<? echo $row['archiveId'] ?>')" >asdfasdfasdf</a></li>
+							<li><a href = "javascript:loadArchiveInPlayer('<? echo $row['archiveId'] ?>')" ><? echo $row['filename'] ?> from <? echo $row['username'] ?></a></li>
+							<span style="color: white; margin-left: 8px;"><? echo $row['comment'] ?></span>
+							
 							<?
 							
 					}
