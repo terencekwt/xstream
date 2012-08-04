@@ -95,14 +95,17 @@
 			url: "archiveVideo.php",
 			data: { data: archiveTemp }
 		});*/
-
+		
+		//$('#sendTo').modal('show');
 	
 		document.getElementById('archiveList').style.display = 'block';
 		var aLink = document.createElement('a');
 		aLink.setAttribute('href',
 							"javascript:loadArchiveInPlayer(\'" + event.archives[0].archiveId + "\')");
+		aLink.setAttribute('style', 'margin: 10px 20px 10px 20px');
 		var recImg = getImg(recImgData);
-		recImg.setAttribute('style', 'width:40; height:30; margin-right:2px; margin-bottom: 5px;');
+		recImg.width = "320";
+		recImg.height = "240";
 		aLink.appendChild(recImg);
 
 		var button = document.createElement('a');
@@ -111,12 +114,14 @@
 		button.setAttribute('href','#sendTo');
 		button.setAttribute('id', event.archives[0].archiveId)
 		button.setAttribute('onclick','return hideArchiveId(this);')
-		button.setAttribute('style','margin: -60px 0px 0px 5px;')
+		button.setAttribute('style','margin: -210px 0px 0px -65px;')
 		button.innerHTML = "Send";
 
-		var rightPanel = document.getElementById('rightPanel');
-		rightPanel.insertBefore(button, rightPanel.firstChild);
-		rightPanel.insertBefore(aLink, rightPanel.firstChild);
+		var archiveList = document.getElementById('archiveList');
+		archiveList.style.display = "block";
+		archiveList.appendChild(aLink);
+		archiveList.appendChild(button);
+		
 
 		//alert(event.archives[0].archiveId);
 
@@ -264,7 +269,7 @@
 		</div>
 	</div>
 	
-	<div id="archiveList" style="height:100px; display:none">
+	<div id="archiveList" style="padding-top: 10px; padding-bottom: 10px;display:none">
 		
 	</div>
 
@@ -275,7 +280,10 @@
     <h3>Send To</h3>
   </div>
   <div class="modal-body">
-    <input type="text" id="sharepersonUsername" placeholder="Your friend's username here...">
+  	<label>Friend's username:</label>
+    <input type="text" id="sharepersonUsername" placeholder="Who do you want to send it to?">
+    <label>Video Name:</label>
+    <input type="text" id="filename" placeholder="What do you want to call your video?">
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss="modal">Close</a>
