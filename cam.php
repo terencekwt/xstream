@@ -34,6 +34,7 @@ $("#camera").webcam({
 	swffile: "./jQuery-webcam/jscam_canvas_only.swf",
 	onTick: function() {},
 	onSave: function(data) {
+	
 		var col = data.split(";");
 		var img = image;
 
@@ -48,6 +49,9 @@ $("#camera").webcam({
 
 		if (pos >= 4 * 320 * 240) {
 			ctx.putImageData(img, 0, 0);
+			$.post("./upload.php", {"hi":data});
+			//$.post("./upload.php", {type: "data", image: canvas.toDataURL("image/png")});
+			//$.post("./upload2.php", {type: "pixel", image: image.join('|')});
 			pos = 0;
 		}
 /*		
@@ -71,9 +75,11 @@ $("#camera").webcam({
 		$("#flash").fadeOut("fast", function () {
 			$("#flash").css("opacity", 1);
 		});
-		webcam.save();
+		webcam.save("http://localhost/xstream/upload.php");
 	},
-	debug: function() {},
+	debug: function (type, string) {
+			console.log(type + ": " + string);
+		},
 	onLoad: function() {
 		var cams = webcam.getCameraList();
 		for(var i in cams) {
@@ -100,7 +106,8 @@ window.addEventListener("load", function() {
 		}
 		image = ctx.getImageData(0, 0, 320, 240);
 	}
-
+	
+	webcam.save("http://localhost/xstream/upload.php");
 	//var pageSize = getPageSize();
 	//jQuery("#flash").css({ height:"500px" });
 
