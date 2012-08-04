@@ -20,6 +20,8 @@
 <script src="./jQuery-webcam/jquery.webcam.js" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8">
 	$('#SignUp_Modal').modal('hide');
+	$('#currentCam').hide();
+	$('#playbackCam').hide();
 
 	var recorderManager;
 	var recorder;
@@ -49,12 +51,15 @@
 	}
 
 	function createRecorder() {
-		var recDiv = document.createElement('div');
-		recDiv.setAttribute('id', 'recorderElement');
-		document.getElementById('recorderContainer').appendChild(recDiv);
-		recorder = recorderManager.displayRecorder(TOKEN, recDiv.id);
+		//var recDiv = document.createElement('div');
+		//recDiv.setAttribute('id', 'recorderElement');
+		//document.getElementById('recorderContainer').appendChild(recDiv);
+		recorder = recorderManager.displayRecorder(TOKEN, 'currentCam', { height: VIDEO_HEIGHT, width: VIDEO_WIDTH} );
 		recorder.addEventListener('recordingStarted', recStartedHandler);
 		recorder.addEventListener('archiveSaved', archiveSavedHandler);
+		
+		$('#currentCam').hide('slow');
+		$('#playbackCam').hide('slow');
 	}
 
 	function getImg(imgData) {
@@ -66,11 +71,15 @@
 	function loadArchiveInPlayer(archiveId) {
 		//archiveId = "fc09cc82-3dc0-4026-a854-d162c86d9328";
 		if (!player) {
-			playerDiv = document.createElement('div');
-			playerDiv.setAttribute('id', 'playerElement');
-			document.getElementById('playerContainer').appendChild(playerDiv);
-			player = recorderManager.displayPlayer(archiveId, TOKEN, playerDiv.id);
-			document.getElementById('playerContainer').style.display = 'block';
+			//playerDiv = document.createElement('div');
+			//playerDiv.setAttribute('id', 'playerElement');
+			//document.getElementById('playerContainer').appendChild(playerDiv);
+			
+			player = recorderManager.displayPlayer(archiveId, TOKEN, 'playbackCam', { height: VIDEO_HEIGHT, width: VIDEO_WIDTH} );
+			//document.getElementById('playerContainer').style.display = 'block';
+			
+			$('#currentCam').hide('slow');
+			$('#playbackCam').show('slow');
 		} else {
 			player.loadArchive(archiveId);
 		}
@@ -93,6 +102,9 @@
 		recImg.setAttribute('style', 'width:80; height:60; margin-right:2px');
 		aLink.appendChild(recImg);
 		document.getElementById('archiveList').appendChild(aLink);
+		
+		$('#currentCam').hide('slow');
+		$('#playbackCam').show('slow');
 		
 		//document.getElementById('myList').appendChild('<p>'+event.archives[0].archiveId);
 		//document.getElementById('myList').write(event.archives[0].archiveId);
@@ -143,8 +155,6 @@
 </script>
 </head>
 
-
-
 <body onload="init()">
 	<div class="navbar">
 		<div class="navbar-inner">
@@ -164,18 +174,27 @@
 	
 	<div id="camera_panel">
 		<div id="camera" style="border: 2px solid blue;">
-			<div id="recorderContainer" style="height:450px; width 600px; margin-right:8px;">
+			<div id="currentCam" style="board: 5px solid green;">
+			CURRENTCAM
+			</div>
+			
+			<div id="playbackCam" style="board: 5px solid black;">
+			PLAYBACKCAM
+			</div>
+			
+			<!--<div id="recorderContainer" style="height:450px; width 600px; margin-right:8px;">
 					<p>Recorder:</p>
 			</div>
 			<div id="playerContainer" style="float:left; height:450px; width 600px; display:none">
 				<p>Stand-alone player:</p>
 			</div>
 			<div style="clear:both; margin"></div>
-			<div id="myList"></div>
-			<div id="archiveList" style="height:100px; display:none">
-				<p>Recordings (click to play):</p>
-			</div>
+			<div id="myList"></div>-->
 		</div>
+	</div>
+	
+	<div id="archiveList" style="height:100px; display:none">
+		<p>Recordings (click to play):</p>
 	</div>
 <!--
 <input type="file" accept="image/*;capture=camera">
