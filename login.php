@@ -39,9 +39,10 @@ if($userQuery) { // Login success
   header($redirectPath);
 }
 else {  // Redirect
+  echo("What?");
   $redirectPath =
     ($_SERVER["HTTP_HOST"] == "localhost") ?
     "location:https://localhost/xstream/index.html" : "location:http://vis.cs.ucdavis.edu/~yus/xstream/index.html";
-  header($redirectPath+"#fail");
+  header($redirectPath);
 }
 ?>
