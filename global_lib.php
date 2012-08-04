@@ -1,11 +1,15 @@
-// Global Lib
-
 <?
-
 	require_once "database.php";
 	
 	// API Key used to access OpenTok
 	$apiKey = '';
+
+	session_name('xstreamLogin');
+	//cookies last for two weeks
+	session_set_cookie_params(2*7*24*60*60);
+	session_start();
+
+	echo $_SESSION['token'];
 	
 	// Include jQuery
 	echo '<script type="text/javascript">';
