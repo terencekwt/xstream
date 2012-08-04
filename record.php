@@ -166,15 +166,17 @@
 	function shareVid() {
 		var hiddenInput = document.getElementById('hiddenInput');
 		var shareperson = document.getElementById('sharepersonUsername');
+		var fname = document.getElementById('filename');
+		var thecomments = document.getElementById('comments');
 
 		//alert(hiddenInput.value);
 
 		$.ajax({
 		  type: "POST",
 		  url: "share_video.php",
-		  data: {sharepersonUsername: shareperson.value, archiveId: hiddenInput.value }
+		  data: {sharepersonUsername: shareperson.value, filename:fname.value, comments: thecomments.value, archiveId: hiddenInput.value }
 		}).done(function( msg ) {
-		  //alert( "Video Shared!");
+		  alert( "Video Shared! "+msg);
 		  $('#sendTo').modal('hide');
 		});
 
@@ -290,6 +292,8 @@
     <input type="text" id="sharepersonUsername" placeholder="Who do you want to send it to?">
     <label>Video Name:</label>
     <input type="text" id="filename" placeholder="What do you want to call your video?">
+    <label>Comments:</label>
+    <input type="textarea" id="comments" placeholder="What do you want to say?">
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss="modal">Close</a>

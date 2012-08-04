@@ -4,6 +4,8 @@ require_once "global_lib.php";
 $id = $_SESSION['id'];
 $archiveId = $_POST['archiveId'];
 $sharepersonUsername = $_POST['sharepersonUsername'];
+$filename = $_POST['filename'];
+$comments = $_POST['comments'];
 /*
 $id = $_GET['id'];
 $archiveId = $_GET['archiveId'];
@@ -25,8 +27,9 @@ $videoId = $videoIdQuery['id'];
 
 $insertQuery = "INSERT INTO share(userId, videoId, sharepersonId) VALUES('$id', '$videoId', '$sharepersonId')";
 $insertQuery = mysql_query($insertQuery);
-if($insertQuery)
-	echo "Success";
-else
-	echo "Failed";
+
+$updateQuery = "UPDATE video
+				SET comment = '$comments', filename = '$filename', username = '$_SESSION[username]'
+				WHERE archiveId = '$archiveId'";
+$updateQuery = mysql_query($updateQuery);
 ?>
