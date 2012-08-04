@@ -5,16 +5,22 @@ div#camera_panel {
 	-webkit-border-radius: 3px 3px 0px 0px;
 	-moz-border-radius: 3px 3px 0px 0px;
 	border-radius: 3px 3px 0px 0px;
+	width: 100%;
 }
 
 div#camera {
 	width: 600px;
 	height: 450px;
-
 	margin-left: auto;
 	margin-right: auto;
 }
 
+.box{
+
+	width: 200px;
+	height: 150px;
+	border: 1px solid black;
+}
 
 a#upload_btn {
 
