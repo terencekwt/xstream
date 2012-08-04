@@ -1,5 +1,6 @@
 <?php
-require_once "database.php";
+
+require_once("global_lib.php");
 
 // username and pass sent from form
 $username = $_POST['username'];
