@@ -212,7 +212,7 @@
 			-->
 			<?
 
-				$userQuery = "SELECT archiveId, filename, comment,username FROM share LEFT JOIN video ON share.videoId = video.id WHERE share.sharepersonId = '" . $_SESSION['id'] . "'";
+				$userQuery = "SELECT archiveId, filename, comment,username FROM share LEFT JOIN video ON share.videoId = video.id WHERE share.sharepersonId = '$_SESSION[id]' ORDER BY video.id DESC";
 				$userQuery = mysql_query($userQuery);
 				//$userQuery = mysql_fetch_assoc($userQuery);
 				
