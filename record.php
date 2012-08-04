@@ -33,8 +33,7 @@
 	
 	var API_KEY = "17003151";
 	//var sessionId = "2_MX4xNzAwMzE1MX5-U2F0IEF1ZyAwNCAwMTo1MjozMiBQRFQgMjAxMn4wLjA1OTA4OTMwM34";
-	var TOKEN ="T1==cGFydG5lcl9pZD0xNzAwMzE5MiZzaWc9MmI3ZmM2ZTNiYTllNzY4ZDA4MWI2ZTBkMzUxYzdlY2EyNjJmODI4ZTpzZXNzaW9uX2lkPTJfTVg0eE56QXdNekUxTVg1LVUyRjBJRUYxWnlBd05DQXdNVG8xTWpvek1pQlFSRlFnTWpBeE1uNHdMakExT1RBNE9UTXdNMzQmY3JlYXRlX3RpbWU9MTM0NDA3Mzc2OCZleHBpcmVfdGltZT0xMzQ0MTYwMTY4JnJvbGU9bW9kZXJhdG9yJmNvbm5lY3Rpb25fZGF0YT0mbm9uY2U9NDEyMDk4";
-	
+    var TOKEN = "<? echo $_SESSION['token']; ?>";
 	
 	var VIDEO_HEIGHT = 450;
 	var VIDEO_WIDTH = 600;
@@ -166,7 +165,7 @@
 				<ul class="nav pull-right">
 					<li class=""><a href="#"><? $_SESSION['username'] ?></a></li>					
 					<li class="divider-vertical"></li>
-					<li class=""><a data-toggle="modal" href="#SignUp_Modal">Sign Up</a></li>						
+					<li class=""><a href="logout.php">Sign Out</a></li>						
 				</ul>
 			</div>
 		</div>
