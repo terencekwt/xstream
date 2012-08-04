@@ -87,6 +87,16 @@
 	}
 	
 	function archiveSavedHandler(event) {
+	
+		var archiveTemp = event.archives[0].archiveId;
+		
+		$.ajax({
+			type: "POST",
+			url: "archiveVideo.php",
+			data: { data: archiveTemp }
+		});
+
+	
 		document.getElementById('archiveList').style.display = 'block';
 		var aLink = document.createElement('a');
 		aLink.setAttribute('href',
@@ -192,6 +202,41 @@
 			<div id="box2" class="box"></div>
 			<div id="box3" class="box"></div>
 			-->
+			<?
+
+				$userQuery = "SELECT archiveId FROM share LEFT JOIN video ON share.videoId = video.id WHERE share.sharepersonId = '" . $_SESSION['id'] . "'";
+				$userQuery = mysql_query($userQuery);
+				//$userQuery = mysql_fetch_assoc($userQuery);
+				
+				if ($userQuery) {
+					echo '<ul>';
+					while($row = mysql_fetch_assoc($userQuery)) {
+							echo '<li>' . $row['archiveId'] . '</li>';
+							?>
+							<script type="text/javascript">
+							
+								recImgData = recorder.getImgData();
+								var aLink = document.createElement('a');
+								aLink.setAttribute('href',
+													"javascript:loadArchiveInPlayer(\'" + <? $row['archiveId'] ?>+ "\')");
+								//var recImg = getImg(recImgData);
+								//recImg.setAttribute('style', 'width:40; height:30; margin-right:2px');
+								//aLink.appendChild(recImg);
+								aLink.value="asdfasfd";
+								//document.getElementById('leftPanel').appendChild(aLink);
+							</script>
+							
+							<li><a href = "javascript:loadArchiveInPlayer('<? echo $row['archiveId'] ?>')" >asdfasdfasdf</a></li>
+							<?
+							
+					}
+					echo '</ul>';
+				}
+				else {
+					alert("Unable to connect to database to get the video archive information");
+				}
+				
+			?>
 		</div>
 		<div class="span6" style="">
 		<div id="myTab" class="tabbable tabs-below">
