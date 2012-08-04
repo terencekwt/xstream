@@ -94,9 +94,10 @@
 		aLink.setAttribute('href',
 							"javascript:loadArchiveInPlayer(\'" + event.archives[0].archiveId + "\')");
 		var recImg = getImg(recImgData);
-		recImg.setAttribute('style', 'width:80; height:60; margin-right:2px');
+		recImg.setAttribute('style', 'width:40; height:30; margin-right:2px');
 		aLink.appendChild(recImg);
-		document.getElementById('archiveList').appendChild(aLink);
+		//document.getElementById('archiveList').appendChild(aLink);
+		document.getElementById('rightPanel').appendChild(aLink);
 		
 		$('#currentCam').hide('slow');
 		$('#playbackCam').show('slow');
@@ -168,10 +169,12 @@
 	</div>
 	<div id="camera_panel">
 		<div class="row-fluid">
-		<div class="span3">
-			<div class="box"></div>
-			<div class="box"></div>
-			<div class="box"></div>
+		<div class="span3" id="rightPanel">
+			<!--
+			<div id="box1" class="box"></div>
+			<div id="box2" class="box"></div>
+			<div id="box3" class="box"></div>
+			-->
 		</div>
 		<div class="span6">
 		<div id="camera" style="border: 2px solid blue;">
