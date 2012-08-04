@@ -52,7 +52,7 @@ div#camera {
 }
 
 .get-started {
-	text-align:center;
+
 }
 
 h1,h2 {
@@ -60,12 +60,12 @@ h1,h2 {
 }
 
 .lead {
-	text-align: center;
+
 }
 
 .bullets {
-	text-align:center;
-	padding:100px 0px 0px 0px;
+	padding:50px 0px 0px 0px;
+
 }
 
 body {
@@ -74,5 +74,4 @@ body {
 
 div#rightPanel {
 	height: 500px;
-	overflow-y: scroll;
 }

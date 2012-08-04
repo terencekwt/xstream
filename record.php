@@ -293,7 +293,7 @@
     <label>Video Name:</label>
     <input type="text" id="filename" placeholder="What do you want to call your video?">
     <label>Comments:</label>
-    <input type="textarea" id="comments" placeholder="What do you want to say?">
+    <input type="textarea" id="comments" placeholder="What do you want to say?" >
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss="modal">Close</a>
