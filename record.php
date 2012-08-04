@@ -46,14 +46,14 @@
 	}
 
 	function createRecorder() {
-		//var recDiv = document.createElement('div');
-		//recDiv.setAttribute('id', 'recorderElement');
-		//document.getElementById('recorderContainer').appendChild(recDiv);
+
 		recorder = recorderManager.displayRecorder(TOKEN, 'currentCam', { height: VIDEO_HEIGHT, width: VIDEO_WIDTH} );
 		recorder.addEventListener('recordingStarted', recStartedHandler);
 		recorder.addEventListener('archiveSaved', archiveSavedHandler);
-		
-		$('#playbackCam').height(0);
+	}
+
+	function createPlayer() {
+
 	}
 
 	function getImg(imgData) {
@@ -63,18 +63,11 @@
 	}
 
 	function loadArchiveInPlayer(archiveId) {
-		//archiveId = "fc09cc82-3dc0-4026-a854-d162c86d9328";
-		recorderManager.removeRecorder(recorder);
-		if (!player) {
-			//playerDiv = document.createElement('div');
-			//playerDiv.setAttribute('id', 'playerElement');
-			//document.getElementById('playerContainer').appendChild(playerDiv);
-			
+		$('#myTab a[href="#play"]').tab('show');
+		//recorderManager.removeRecorder(recorder);
+		if (!player) {			
 			player = recorderManager.displayPlayer(archiveId, TOKEN, 'playbackCam', { height: VIDEO_HEIGHT, width: VIDEO_WIDTH} );
-			//document.getElementById('playerContainer').style.display = 'block';
 			
-			$('#currentCam').height(0);
-			$('#playbackCam').height(VIDEO_HEIGHT);
 		} else {
 			player.loadArchive(archiveId);
 		}
@@ -96,14 +89,8 @@
 		var recImg = getImg(recImgData);
 		recImg.setAttribute('style', 'width:40; height:30; margin-right:2px');
 		aLink.appendChild(recImg);
-		//document.getElementById('archiveList').appendChild(aLink);
 		document.getElementById('rightPanel').appendChild(aLink);
 		
-		$('#currentCam').hide('slow');
-		$('#playbackCam').show('slow');
-		
-		//document.getElementById('myList').appendChild('<p>'+event.archives[0].archiveId);
-		//document.getElementById('myList').write(event.archives[0].archiveId);
 		console.log(event.archives[0].archiveId);
 	}
 
@@ -169,34 +156,35 @@
 	</div>
 	<div id="camera_panel">
 		<div class="row-fluid">
-		<div class="span3" id="rightPanel">
+		<div class="span3" id="leftPanel">
 			<!--
 			<div id="box1" class="box"></div>
 			<div id="box2" class="box"></div>
 			<div id="box3" class="box"></div>
 			-->
 		</div>
-		<div class="span6">
-		<div id="camera" style="border: 2px solid blue;">
-			<div id="currentCam" style="border: 5px solid green;position: absolute;">
-			CURRENTCAM
-			</div>
-			
-			<div id="playbackCam" style="border: 5px solid black; position: absolute; margin-top: -600px;">
-			PLAYBACKCAM
-			</div>
-			
-			<!--<div id="recorderContainer" style="height:450px; width 600px; margin-right:8px;">
-					<p>Recorder:</p>
-			</div>
-			<div id="playerContainer" style="float:left; height:450px; width 600px; display:none">
-				<p>Stand-alone player:</p>
-			</div>
-			<div style="clear:both; margin"></div>
-			<div id="myList"></div>-->
+		<div class="span6" style="">
+		<div id="myTab" class="tabbable tabs-below">
+	        <div class="tab-content">
+	          <div class="tab-pane active" id="record">
+	            <div id="currentCam" style="">
+
+				</div>
+	          </div>
+	          <div class="tab-pane" id="play">
+	            <div id="playbackCam" style="height: 450px;">
+
+				</div>			
+	          </div>
+	        </div>
+	        <ul class="nav nav-tabs">
+	          <li class="active"><a href="#record" data-toggle="tab">Record</a></li>
+	          <li><a href="#play" data-toggle="tab">Play</a></li>
+	        </ul>
+	      </div>
+
 		</div>
-		</div>
-		<div class="span3">adsfadsfad</div>
+		<div class="span3" id="rightPanel"></div>
 		</div>
 	</div>
 	

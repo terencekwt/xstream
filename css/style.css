@@ -30,3 +30,11 @@ div#SignUp_Modal {
 	margin-left: 350px;
 	width: 400px;
 }
+
+div#myTab {
+	width: 600px;
+
+	border: 0px solid;
+
+	margin: auto auto auto auto;
+}
