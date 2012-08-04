@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 04, 2012 at 01:08 PM
+-- Generation Time: Aug 04, 2012 at 01:13 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `share` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) DEFAULT NULL,
   `videoId` int(11) DEFAULT NULL,
+  `sharepersonId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   KEY `videoId` (`videoId`)
